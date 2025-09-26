@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墨韵轩 - 个人主页</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Ma+Shan+Zheng&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #f9f3e9 0%, #f5e9d8 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(210, 180, 140, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 69, 19, 0.03) 0%, transparent 20%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+        
+        .header-decor {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #8B4513;
+            opacity: 0.3;
+        }
+        
+        .header-decor.right {
+            right: 20px;
+            left: auto;
+        }
+        
+        h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 4rem;
+            color: #8B4513;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            letter-spacing: 8px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #654321;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #D2B48C, transparent);
+            margin: 30px auto;
+            width: 80%;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #D2B48C;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(139, 69, 19, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(139, 69, 19, 0.15);
+        }
+        
+        .card h2 {
+            font-family: 'Ma Shan Zheng', cursive;
+            color: #8B4513;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .about-content {
+            text-align: justify;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #f5e9d8 0%, #e8d8c3 100%);
+            border: 1px solid #D2B48C;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            color: #654321;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #8B4513;
+        }
+        
+        .project-card h3 {
+            color: #8B4513;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #8B4513;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: #654321;
+            transform: scale(1.1);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px 20px;
+            color: #654321;
+            font-size: 0.9rem;
+            border-top: 1px solid #D2B48C;
+            margin-top: 40px;
+        }
+        
+        .chinese-pattern {
+            position: absolute;
+            opacity: 0.05;
+            font-size: 40px;
+            z-index: -1;
+        }
+        
+        .pattern-1 {
+            top: 100px;
+            left: 50px;
+        }
+        
+        .pattern-2 {
+            bottom: 100px;
+            right: 50px;
+            transform: rotate(180deg);
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #8B4513;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+        }
+        
+        .quote {
+            font-style: italic;
+            text-align: center;
+            margin: 30px 0;
+            color: #654321;
+            font-size: 1.2rem;
+            padding: 0 20px;
+        }
+        
+        .quote::before,
+        .quote::after {
+            content: """;
+            font-size: 2rem;
+            color: #8B4513;
+        }
+    </style>
+</head>
+<body>
+    <div class="chinese-pattern pattern-1">☯</div>
+    <div class="chinese-pattern pattern-2">☯</div>
+    
+    <div class="container">
+        <header>
+            <div class="header-decor">☰</div>
+            <div class="header-decor right">☰</div>
+            <h1>墨韵轩</h1>
+            <p class="subtitle">传承中华文化 · 追求卓越创新</p>
+            <div class="divider"></div>
+        </header>
+        
+        <div class="quote">
+            腹有诗书气自华，最是书香能致远
+        </div>
+        
+        <div class="content">
+            <div class="card">
+                <h2>关于我</h2>
+                <div class="about-content">
+                    <p>吾乃江南人士，自幼习文弄墨，酷爱传统文化。虽生于数字时代，然心系古典雅韵，常以现代技术诠释东方美学。</p>
+                    <p>求学于信息科技之域，精研前端开发之道，善用代码织就锦绣文章。工作之余，喜书法、茶道、古琴，以养心性。</p>
+                    <p>信奉"知行合一"之理，既重理论修养，亦重实践创新。愿以所学所长，为中华文化之传承与发扬略尽绵薄之力。</p>
+                    
+                    <div class="skills">
+                        <span class="skill-tag">HTML5/CSS3</span>
+                        <span class="skill-tag">JavaScript/TypeScript</span>
+                        <span class="skill-tag">React/Vue</span>
+                        <span class="skill-tag">UI/UX设计</span>
+                        <span class="skill-tag">书法</span>
+                        <span class="skill-tag">茶道</span>
+                        <span class="skill-tag">古琴</span>
+                        <span class="skill-tag">诗词</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>作品集</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>水墨丹青网站</h3>
+                        <p>运用Canvas技术实现动态水墨效果，展现中国传统绘画艺术之美。</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>诗词雅集平台</h3>
+                        <p>古典诗词学习与创作社区，集成AI辅助创作功能。</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>茶道文化APP</h3>
+                        <p>茶文化知识普及与茶艺教学移动应用，获设计大奖。</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>古琴谱数字化</h3>
+                        <p>传统古琴谱的数字化保存与交互式学习系统。</p>
+                    </div>
+                </div>
+                
+                <h2 style="margin-top: 30px;">联系方式</h2>
+                <div class="contact-info">
+                    <div class="contact-item">📧 mo_yunxuan@example.com</div>
+                    <div class="contact-item">📱 +86 138-0013-8000</div>
+                    <div class="contact-item">📍 杭州 · 西湖畔</div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="GitHub">G</a>
+                        <a href="#" class="social-link" title="微博">W</a>
+                        <a href="#" class="social-link" title="知乎">Z</a>
+                        <a href="#" class="social-link" title="LinkedIn">L</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2024 墨韵轩 · 以文会友，以友辅仁</p>
+            <p>传承不守旧，创新不忘本</p>
+        </footer>
+    </div>
+    
+    <a href="#" class="scroll-top" id="scrollTop">↑</a>
+    
+    <script>
+        // Scroll to top functionality
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Add subtle hover effects to project cards
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-3px)';
+                card.style.boxShadow = '0 6px 20px rgba(139, 69, 19, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
